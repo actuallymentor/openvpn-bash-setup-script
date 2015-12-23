@@ -39,7 +39,7 @@ To install:
 
 ##Configuration files
 
-You will find 2 .ovpn files in /etc/openvpn/easy-rsa/keys. Download them both.
+You will find 2 .ovpn files in ~ (home directory). Download them both.
 
 ## Setting up your computer
 
