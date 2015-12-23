@@ -1,3 +1,13 @@
+#######################################
+########### START ACTIONS #############
+#######################################
+
+# Dependencies
+
+sudo apt-get update #update all repos
+sudo apt-get -y install openvpn easy-rsa curl wget dnsutils ufw #install openvpn and easyrsa
+apt-get -y upgrade #update everything
+
 #!/bin/bash
 ipvar=$(dig +short myip.opendns.com @resolver1.opendns.com) #grab our IP
 echo "$ipvar"
@@ -122,9 +132,6 @@ rotaterules='/var/log/apt-security-updates {
 ########### START ACTIONS #############
 #######################################
 
-sudo apt-get update #update all repos
-sudo apt-get -y install openvpn easy-rsa curl #install openvpn and easyrsa
-apt-get -y upgrade #update everything
 
 # UDP Server
 touch /etc/openvpn/udpserver.conf
