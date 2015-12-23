@@ -247,4 +247,6 @@ touch /etc/logrotate.d/apt-security-updates
 echo $updaterules > /etc/cron.daily/apt-security-updates
 echo $rotaterules > /etc/logrotate.d/apt-security-updates
 sudo chmod +x /etc/cron.daily/apt-security-updates
+cp /etc/openvpn/easy-rsa/keys/$vpnclientTCP.ovpn ~
+cp /etc/openvpn/easy-rsa/keys/$vpnclientUDP.ovpn ~
 sudo reboot
