@@ -48,8 +48,6 @@ persist-tun
 ns-cert-type server
 comp-lzo
 verb $verbosity
-user nobody
-group nogroup
 cipher $vpncipher"
 ovpnsetstcp="client
 remote $ipvar 443
@@ -63,8 +61,6 @@ persist-tun
 ns-cert-type server
 comp-lzo
 verb $verbosity
-user nobody
-group nogroup
 cipher $vpncipher"
 udpserver="port 1194
 proto udp
