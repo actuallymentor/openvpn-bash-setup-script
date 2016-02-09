@@ -11,7 +11,6 @@ apt-get -y upgrade #update everything
 #!/bin/bash
 ipvar=$(dig +short myip.opendns.com @resolver1.opendns.com) #grab our IP
 echo "$ipvar"
-read -p "Has ip?"
 
 # USER INFO
 vpnclient="UDPclient" # Name of the regular config file
