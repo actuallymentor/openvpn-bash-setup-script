@@ -123,7 +123,7 @@ echo "Building CA with RSA key size ${KEY_SIZE}"
 
 # Build dh
 if [ -d $KEY_DIR ] && [ $DH_KEY_SIZE ]; then
-    $OPENSSL dhparam -out ${KEY_DIR}/dh${DH_KEY_SIZE}.pem ${DH_KEY_SIZE}
+    $OPENSSL dhparam -out ${KEY_DIR}/${SERVER}dh${DH_KEY_SIZE}.pem ${DH_KEY_SIZE}
 else
     echo 'Please source the vars script first (i.e. "source ./vars")'
     echo 'Make sure you have edited it to reflect your configuration.'
@@ -133,7 +133,7 @@ fi
 openvpn --genkey --secret "keys/${SERVER}ta.key"
 
 # Copy keys to openvpn folder & sae to vars
-cp ~/openvpn-ca/keys/{"${SERVER}ca.crt","${SERVER}ca.key","${SERVER}server.crt","${SERVER}server.key","${SERVER}ta.key","${SERVER}dh$DH_KEY_SIZE.pem"} /etc/openvpn
+cp ~/openvpn-ca/keys/{"ca.crt","ca.key","${SERVER}server.crt","${SERVER}server.key","${SERVER}ta.key","${SERVER}dh$DH_KEY_SIZE.pem"} /etc/openvpn
 # Rename CA key and crt
 mv /etc/openvpn/ca.key /etc/openvpn/${SERVER}ca.key
 mv /etc/openvpn/ca.crt /etc/openvpn/${SERVER}ca.crt
