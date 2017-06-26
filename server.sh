@@ -116,7 +116,7 @@ export KEY_SIZE=$RSA_KEY_SIZE
 # Clean up and product keys
 echo "Building CA with RSA key size ${KEY_SIZE}"
 ./clean-all
-./build-ca --batch ${SERVER}
+./build-ca --batch $SERVER
 
 # Build keys
 ./build-key-server "${SERVER}server"
