@@ -85,7 +85,7 @@ echo "   1) AES-128-CBC (fastest and sufficiently secure for everyone, recommend
 echo "   2) AES-192-CBC"
 echo "   3) AES-256-CBC"
 while [[ $CIPHER != "1" && $CIPHER != "2" && $CIPHER != "3" ]]; do
-	read -p "Cipher [1-7]: " -e -i 1 CIPHER
+	read -p "Cipher [1-3]: " -e -i 1 CIPHER
 done
 case $CIPHER in
 	1)
@@ -133,7 +133,7 @@ fi
 openvpn --genkey --secret "keys/${SERVER}ta.key"
 
 # Copy keys to openvpn folder & sae to vars
-cd ~/openvpn-ca
+cd ~/openvpn-ca/keys
 cp "~/${SERVER}ca.crt" "ca.key" "${SERVER}server.crt" "${SERVER}server.key" "${SERVER}ta.key" "${SERVER}dh$DH_KEY_SIZE.pem" /etc/openvpn
 TA="keys/${SERVER}ta.key"
 KEY="ca.key"
