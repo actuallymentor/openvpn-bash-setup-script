@@ -1,3 +1,5 @@
+# Vars for Ubuntu
+SYSCTL=/etc/sysctl.conf
 # Update
 apt-get update
 apt-get install openvpn easy-rsa -y
