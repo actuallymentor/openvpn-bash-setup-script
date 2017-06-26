@@ -133,7 +133,8 @@ fi
 openvpn --genkey --secret "keys/${SERVER}ta.key"
 
 # Copy keys to openvpn folder & sae to vars
-cp "${SERVER}ca.crt" "ca.key" "${SERVER}server.crt" "${SERVER}server.key" "${SERVER}ta.key" "${SERVER}dh$DH_KEY_SIZE.pem" /etc/openvpn
+cd ~/openvpn-ca
+cp "~/${SERVER}ca.crt" "ca.key" "${SERVER}server.crt" "${SERVER}server.key" "${SERVER}ta.key" "${SERVER}dh$DH_KEY_SIZE.pem" /etc/openvpn
 TA="keys/${SERVER}ta.key"
 KEY="ca.key"
 CA="${SERVER}ca.crt"
