@@ -117,7 +117,6 @@ export KEY_SIZE=$RSA_KEY_SIZE
 echo "Building CA with RSA key size ${KEY_SIZE}"
 ./clean-all
 ./build-ca --batch $SERVER
-mv ~/openvpn-ca/keys/ca.key ~/openvpn-ca/keys/${SERVER}ca.key
 
 # Build keys
 ./build-key-server --batch "${SERVER}server"
@@ -135,6 +134,9 @@ openvpn --genkey --secret "keys/${SERVER}ta.key"
 
 # Copy keys to openvpn folder & sae to vars
 cp ~/openvpn-ca/keys/{"${SERVER}ca.crt","${SERVER}ca.key","${SERVER}server.crt","${SERVER}server.key","${SERVER}ta.key","${SERVER}dh$DH_KEY_SIZE.pem"} /etc/openvpn
+# Rename CA key and crt
+mv /etc/openvpn/ca.key /etc/openvpn/${SERVER}ca.key
+mv /etc/openvpn/ca.crt /etc/openvpn/${SERVER}ca.crt
 TA="keys/${SERVER}ta.key"
 KEY="${SERVER}ca.key"
 CA="${SERVER}ca.crt"
