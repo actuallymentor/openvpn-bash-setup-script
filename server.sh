@@ -1,5 +1,3 @@
-# Vars for Ubuntu
-SYSCTL=/etc/sysctl.conf
 # Checks
 if [[ "$EUID" -ne 0 ]]; then
 	echo "Sorry, you need to run this as root"
@@ -101,7 +99,7 @@ case $CIPHER in
 	;;
 esac
 
-while [[ $SERVER = "" ]]; do
+while [[ ${SERVER} = "" ]]; do
 	echo "Please, use one word only, no special characters"
 	read -p "Client name: " -e -i server SERVER
 done
@@ -113,15 +111,15 @@ cd ~/openvpn-ca
 cd ~/openvpn-ca
 source vars
 # Override any variables from ~/openvpn-ca/vars
-export KEY_NAME="$SERVERserver"
+export KEY_NAME="${SERVER}server"
 export KEY_SIZE=$RSA_KEY_SIZE
 # Clean up and product keys
-echo "Building CA with RSA key size $KEY_SIZE"
+echo "Building CA with RSA key size ${KEY_SIZE}"
 ./clean-all
-./build-ca --batch
+./build-ca --batch ${SERVER}
 
 # Build keys
-./build-key-server "$SERVERserver"
+./build-key-server "${SERVER}server"
 
 # Build dh
 if [ -d $KEY_DIR ] && [ $DH_KEY_SIZE ]; then
@@ -132,27 +130,27 @@ else
 fi
 
 # ta handshake key
-openvpn --genkey --secret "keys/$SERVERta.key"
+openvpn --genkey --secret "keys/${SERVER}ta.key"
 
 # Copy keys to openvpn folder & sae to vars
-cp "$SERVERca.crt" "$SERVERca.key" "$SERVERserver.crt" "$SERVERserver.key" "$SERVERta.key" "$SERVERdh$DH_KEY_SIZE.pem" /etc/openvpn
-TA="keys/$SERVERta.key"
-KEY="$SERVERca.key"
-CA="$SERVERca.crt"
-CRT="$SERVERserver.crt"
-DH="$SERVERdh$DH_KEY_SIZE.pem"
+cp "${SERVER}ca.crt" "${SERVER}ca.key" "${SERVER}server.crt" "${SERVER}server.key" "${SERVER}ta.key" "${SERVER}dh$DH_KEY_SIZE.pem" /etc/openvpn
+TA="keys/${SERVER}ta.key"
+KEY="${SERVER}ca.key"
+CA="${SERVER}ca.crt"
+CRT="${SERVER}server.crt"
+DH="${SERVER}dh$DH_KEY_SIZE.pem"
 
 # Make server config
 touch /etc/openvpn/server.conf
 echo "
-	port $PORT
-	proto $PROTOCOL
-	dh dh$DH_KEY_SIZE.pem
-	cipher $CIPHER
-	ca $SERVERca.crt
-	cert $SERVERserver.crt
-	key $SERVERserver.key
-	tls-auth $SERVERta.key 0
+	port ${PORT}
+	proto ${PROTOCOL}
+	dh dh${DH_KEY_SIZE}.pem
+	cipher ${CIPHER}
+	ca ${SERVER}ca.crt
+	cert ${SERVER}server.crt
+	key ${SERVER}server.key
+	tls-auth ${SERVER}ta.key 0
 	persist-key
 	persist-tun
 	user nobody
@@ -201,21 +199,21 @@ esac
 
 # Save the parameters
 echo "
-	export SERVER=$SERVER
-	export IP=$IP
-	export NIC=$NIC
-	export PORT=$PORT
-	export PROTOCOL=$PROTOCOL
-	export DNS=$DNS
-	export DH_KEY_SIZE=$DH_KEY_SIZE
-	export RSA_KEY_SIZE=$RSA_KEY_SIZE
-	export CIPHER=$CIPHER
-	export CA=$CA
-	export CERT=$CERT
-	export KEY=$KEY
-	export TA=$TA
-	export DH=$DH
-" >> /etc/openvpn/$SERVER.server
+	export SERVER=${SERVER}
+	export IP=${IP}
+	export NIC=${NIC}
+	export PORT=${PORT}
+	export PROTOCOL=${PROTOCOL}
+	export DNS=${DNS}
+	export DH_KEY_SIZE=${DH_KEY_SIZE}
+	export RSA_KEY_SIZE=${RSA_KEY_SIZE}
+	export CIPHER=${CIPHER}
+	export CA=${CA}
+	export CERT=${CERT}
+	export KEY=${KEY}
+	export TA=${TA}
+	export DH=${DH}
+" >> /etc/openvpn/${SERVER}.server
 
 
 # Set up firewall
