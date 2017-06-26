@@ -117,7 +117,7 @@ export KEY_SIZE=$RSA_KEY_SIZE
 echo "Building CA with RSA key size ${KEY_SIZE}"
 ./clean-all
 ./build-ca --batch $SERVER
-mv ~/openvpn-ca/keys/ca.key "~/openvpn-ca/keys/${SERVER}ca.key"
+mv ~/openvpn-ca/keys/ca.key ~/openvpn-ca/keys/${SERVER}ca.key
 
 # Build keys
 ./build-key-server --batch "${SERVER}server"
