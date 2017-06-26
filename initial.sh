@@ -1,6 +1,6 @@
 # Update
 apt-get update
-apt-get install openvpn easy-rsa
+apt-get install openvpn easy-rsa -y
 
 # Get Internet network interface with default route
 NIC=$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)')
