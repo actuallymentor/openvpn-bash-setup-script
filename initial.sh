@@ -23,7 +23,7 @@ VPNRULES="
 *nat
 :POSTROUTING ACCEPT [0:0] 
 # Allow traffic from OpenVPN client to NIC $NIC interface
--A POSTROUTING -s 10.8.0.0/8 -o $NIC -j MASQUERADE
+-A POSTROUTING -s 10.8.0.0/8 -o ${NIC} -j MASQUERADE
 COMMIT
 # END OPENVPN RULES
 "

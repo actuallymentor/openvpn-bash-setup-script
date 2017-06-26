@@ -32,9 +32,9 @@ chmod 700 ~/client-configs/files
 touch ~/client-configs/files/$CLIENT.ovpn
 echo "
 	client
-	remote $IP $PORT
-	proto $PROTOCOL
-	cipher $CIPHER
+	remote ${IP} ${PORT}
+	proto ${PROTOCOL}
+	cipher ${CIPHER}
 	key-direction 1
 	dev tun
 	persist-key
@@ -48,16 +48,16 @@ echo "
 
 thekeys="
 <ca>
-"$(</etc/openvpn/$CA)"
+"$(</etc/openvpn/${CA})"
 </ca>
 <cert>
-"$(</etc/openvpn/$CERT)"
+"$(</etc/openvpn/${CERT})"
 </cert>
 <key>
-"$(</etc/openvpn/easy-rsa/keys/$KEY.key)"
+"$(</etc/openvpn/easy-rsa/keys/${KEY}.key)"
 </key>
 <tls-auth>
-"$(</etc/openvpn/$TA.key)"
+"$(</etc/openvpn/${TA}.key)"
 </tls-auth>
 "
 echo thekeys >> ~/client-configs/files/$CLIENT.ovpn
