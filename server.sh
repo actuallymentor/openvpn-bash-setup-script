@@ -15,6 +15,9 @@ if [[ "$IP" = "" ]]; then
 	IP=$(wget -qO- ipv4.icanhazip.com)
 fi
 
+# Get Internet network interface with default route
+NIC=$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)')
+
 # Ask for user input, used for inspiration: https://github.com/Angristan/OpenVPN-install/blob/master/openvpn-install.sh
 echo "Otherwise, it should be your public IPv4 address."
 read -p "IP address: " -e -i $IP IP
