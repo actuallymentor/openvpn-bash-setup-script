@@ -144,7 +144,7 @@ CRT="${SERVER}server.crt"
 DH="${SERVER}dh$DH_KEY_SIZE.pem"
 
 # Make server config
-touch /etc/openvpn/server.conf
+touch /etc/openvpn/$SERVER.conf
 echo "
 	port ${PORT}
 	proto ${PROTOCOL}
@@ -166,37 +166,37 @@ echo "
 	auth SHA256
 	verb 0
 	explicit-exit-notify 1
-"  >> /etc/openvpn/server.conf
+"  >> /etc/openvpn/$SERVER.conf
 # Reroute all traffic over vpn
-echo 'push "redirect-gateway def1 bypass-dhcp"' >> /etc/openvpn/server.conf
+echo 'push "redirect-gateway def1 bypass-dhcp"' >> /etc/openvpn/$SERVER.conf
 
 # DNS resolvers
 case $DNS in
 	1)
 	# Obtain the resolvers from resolv.conf and use them for OpenVPN
 	grep -v '#' /etc/resolv.conf | grep 'nameserver' | grep -E -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | while read line; do
-		echo "push \"dhcp-option DNS $line\"" >> /etc/openvpn/server.conf
+		echo "push \"dhcp-option DNS $line\"" >> /etc/openvpn/$SERVER.conf
 	done
 	;;
 	2) #FDN
-	echo 'push "dhcp-option DNS 80.67.169.12"' >> /etc/openvpn/server.conf
-	echo 'push "dhcp-option DNS 80.67.169.40"' >> /etc/openvpn/server.conf
+	echo 'push "dhcp-option DNS 80.67.169.12"' >> /etc/openvpn/$SERVER.conf
+	echo 'push "dhcp-option DNS 80.67.169.40"' >> /etc/openvpn/$SERVER.conf
 	;;
 	3) #DNS.WATCH
-	echo 'push "dhcp-option DNS 84.200.69.80"' >> /etc/openvpn/server.conf
-	echo 'push "dhcp-option DNS 84.200.70.40"' >> /etc/openvpn/server.conf
+	echo 'push "dhcp-option DNS 84.200.69.80"' >> /etc/openvpn/$SERVER.conf
+	echo 'push "dhcp-option DNS 84.200.70.40"' >> /etc/openvpn/$SERVER.conf
 	;;
 	4) #OpenDNS
-	echo 'push "dhcp-option DNS 208.67.222.222"' >> /etc/openvpn/server.conf
-	echo 'push "dhcp-option DNS 208.67.220.220"' >> /etc/openvpn/server.conf
+	echo 'push "dhcp-option DNS 208.67.222.222"' >> /etc/openvpn/$SERVER.conf
+	echo 'push "dhcp-option DNS 208.67.220.220"' >> /etc/openvpn/$SERVER.conf
 	;;
 	5) #Google
-	echo 'push "dhcp-option DNS 8.8.8.8"' >> /etc/openvpn/server.conf
-	echo 'push "dhcp-option DNS 8.8.4.4"' >> /etc/openvpn/server.conf
+	echo 'push "dhcp-option DNS 8.8.8.8"' >> /etc/openvpn/$SERVER.conf
+	echo 'push "dhcp-option DNS 8.8.4.4"' >> /etc/openvpn/$SERVER.conf
 	;;
 	6) #Yandex Basic
-	echo 'push "dhcp-option DNS 77.88.8.8"' >> /etc/openvpn/server.conf
-	echo 'push "dhcp-option DNS 77.88.8.1"' >> /etc/openvpn/server.conf
+	echo 'push "dhcp-option DNS 77.88.8.8"' >> /etc/openvpn/$SERVER.conf
+	echo 'push "dhcp-option DNS 77.88.8.1"' >> /etc/openvpn/$SERVER.conf
 	;;
 esac
 
@@ -221,4 +221,4 @@ echo "
 
 # Set up firewall
 ufw allow $PORT/$PROTOCOL
-systemctl start openvpn@server
+service openvpn restart 
