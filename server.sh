@@ -101,7 +101,7 @@ esac
 
 while [[ ${SERVER} = "" ]]; do
 	echo "Please, use one word only, no special characters"
-	read -p "Client name: " -e -i server SERVER
+	read -p "Server name: " -e -i server SERVER
 done
 
 # Make certificate authority
