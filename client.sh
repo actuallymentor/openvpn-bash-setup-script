@@ -51,7 +51,7 @@ thekeys="
 "$(</etc/openvpn/${CA})"
 </ca>
 <cert>
-"$(</etc/openvpn/${CERT})"
+"$(</etc/openvpn/${CRT})"
 </cert>
 <key>
 "$(</etc/openvpn/easy-rsa/keys/${KEY}.key)"
