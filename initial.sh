@@ -32,6 +32,6 @@ sed -i -e 's/DEFAULT_FORWARD_POLICY="DROP"/DEFAULT_FORWARD_POLICY="ACCEPT"/g' /e
 
 
 ufw allow OpenSSH
-allow ssh
-sudo ufw disable
-sudo ufw enable
+ufw allow ssh
+ufw disable
+yes | ufw enable
