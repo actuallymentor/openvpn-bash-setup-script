@@ -161,7 +161,7 @@ echo "
 	server 10.8.0.0 255.255.255.0
 	ifconfig-pool-persist ipp.txt
 	keepalive 10 120
-	dev tun
+	dev tun${RANDOM}
 	key-direction 0
 	auth SHA256
 	verb 0
