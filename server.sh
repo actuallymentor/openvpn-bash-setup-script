@@ -220,4 +220,4 @@ echo "
 
 # Set up firewall
 ufw allow "${PORT}/${PROTOCOL}"
-service openvpn restart 
+systemctl start openvpn@$SERVER

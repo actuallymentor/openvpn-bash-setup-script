@@ -27,6 +27,7 @@ chmod 700 ~/client-configs/files
 touch ~/client-configs/files/$CLIENT.ovpn
 echo "
 	client
+	auth-nocache
 	remote ${IP} ${PORT}
 	proto ${PROTOCOL}
 	cipher ${CIPHER}
@@ -35,8 +36,6 @@ echo "
 	persist-key
 	persist-tun
 	remote-cert-tls server
-	user nobody
-	group nogroup
 	auth SHA256
 	mute 20
 	verb 3
