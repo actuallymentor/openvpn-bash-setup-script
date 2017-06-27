@@ -221,5 +221,4 @@ echo "
 
 # Set up firewall
 ufw allow "${PORT}/${PROTOCOL}"
-echo ufw allow "${PORT}/${PROTOCOL}"
 service openvpn restart 
