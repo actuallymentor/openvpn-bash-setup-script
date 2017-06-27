@@ -27,8 +27,8 @@ read -p "Port: " -e -i 1194 PORT
 
 echo "What protocol do you want for OpenVPN?"
 echo "Unless UDP is blocked, you should not use TCP (unnecessarily slower)"
-while [[ $PROTOCOL != "UDP" && $PROTOCOL != "TCP" ]]; do
-	read -p "Protocol [UDP/TCP]: " -e -i UDP PROTOCOL
+while [[ $PROTOCOL != "udp" && $PROTOCOL != "tcp" ]]; do
+	read -p "Protocol [udp/tcp]: " -e -i udp PROTOCOL
 done
 
 echo "What DNS do you want to use with the VPN?"
