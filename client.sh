@@ -34,6 +34,7 @@ echo "
 	dev tun
 	persist-key
 	persist-tun
+	remote-cert-tls server
 	user nobody
 	group nogroup
 	auth SHA256
@@ -46,10 +47,10 @@ thekeys="
 "$(</etc/openvpn/${CA})"
 </ca>
 <cert>
-"$(</etc/openvpn/${CRT})"
+"$(<~/openvpn-ca/keys/${CLIENT}.crt)"
 </cert>
 <key>
-"$(</etc/openvpn/${KEY})"
+"$(<~/openvpn-ca/keys/${CLIENT}.key)"
 </key>
 <tls-auth>
 "$(<~/openvpn-ca/${TA})"
