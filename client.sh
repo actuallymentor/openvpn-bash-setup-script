@@ -21,7 +21,7 @@ source /etc/openvpn/$SERVERNAME.server
 # Client key
 cd ~/openvpn-ca
 source vars
-./build-key $CLIENT
+./build-key --batch $CLIENT
 
 # Client .ovpn
 mkdir -p ~/client-configs/files
