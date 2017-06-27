@@ -17,7 +17,7 @@ while [[ $CLIENT = "" ]]; do
 done
 
 # import server settings
-source /etc/openvpn/SERVERNAME.server
+source /etc/openvpn/$SERVERNAME.server
 
 # Client key
 cd ~/openvpn-ca
