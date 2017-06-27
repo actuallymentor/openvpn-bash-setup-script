@@ -1,7 +1,3 @@
-echo "This scrit is run AFTER server setup"
-echo "Press enter to continue..."
-read
-
 echo "What is the server name (without.server)?"
 echo "Options:"
 ls /etc/openvpn/*.server
