@@ -28,7 +28,8 @@ touch ~/client-configs/files/$CLIENT.ovpn
 echo "
 	client
 	auth-nocache
-	remote ${IP} ${PORT}
+	remote ${IP}
+	port ${PORT}
 	proto ${PROTOCOL}
 	cipher ${CIPHER}
 	key-direction 1
