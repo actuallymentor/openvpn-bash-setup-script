@@ -6,7 +6,6 @@ echo "What is the server name (without.server)?"
 echo "Options:"
 ls /etc/openvpn/*.server
 while [[ $SERVERNAME = "" ]]; do
-	echo "No SERVER var is specified, "
 	read -p "Server name: " -e -i server SERVERNAME
 done
 
