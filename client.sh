@@ -59,4 +59,4 @@ thekeys="
 "$(<~/openvpn-ca/${TA})"
 </tls-auth>
 "
-echo thekeys >> ~/client-configs/files/$CLIENT.ovpn
+echo $thekeys >> ~/client-configs/files/$CLIENT.ovpn
