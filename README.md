@@ -5,6 +5,13 @@ This is a setup script for OpenVPN consisting out of 3 parts:
 - server.sh sets up a server for openvpn ( can be run multiple times )
 - client.sh sets up a client config for one of the existing servers
 
+The script will ask for:
+- DH difficulty
+- AES cipher difficulty
+- DNS preferences
+
+The script configures OpenVPN to run with a TA key handshake.
+
 # Usage
 
 This script was written in and for Ubuntu. It should work on any Debian based systems in theory. I've run and tested this script on Ubuntu versions 12 through 16.04. If anything goes wrong I suggest checking is all packages I use are installed (like ufw). In ububtu 16.04 they are by default.
