@@ -89,13 +89,13 @@ while [[ $CIPHER != "1" && $CIPHER != "2" && $CIPHER != "3" ]]; do
 done
 case $CIPHER in
 	1)
-	CIPHER="cipher AES-128-CBC"
+	CIPHER="AES-128-CBC"
 	;;
 	2)
-	CIPHER="cipher AES-192-CBC"
+	CIPHER="AES-192-CBC"
 	;;
 	3)
-	CIPHER="cipher AES-256-CBC"
+	CIPHER="AES-256-CBC"
 	;;
 esac
 
@@ -212,7 +212,7 @@ echo "
 	export RSA_KEY_SIZE=${RSA_KEY_SIZE}
 	export CIPHER=${CIPHER}
 	export CA=${CA}
-	export CERT=${CERT}
+	export CRT=${CRT}
 	export KEY=${KEY}
 	export TA=${TA}
 	export DH=${DH}
@@ -220,5 +220,5 @@ echo "
 
 
 # Set up firewall
-ufw allow $PORT/$PROTOCOL
+ufw allow "${PORT}/${PROTOCOL}"
 service openvpn restart 
