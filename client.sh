@@ -56,7 +56,7 @@ thekeys="
 "$(</etc/openvpn/${KEY})"
 </key>
 <tls-auth>
-"$(<~/openvpn-ca/${TA}.key)"
+"$(<~/openvpn-ca/${TA})"
 </tls-auth>
 "
 echo thekeys >> ~/client-configs/files/$CLIENT.ovpn
