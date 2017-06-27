@@ -116,10 +116,10 @@ export KEY_SIZE=$RSA_KEY_SIZE
 # Clean up and product keys
 echo "Building CA with RSA key size ${KEY_SIZE}"
 ./clean-all
-./build-ca --batch $SERVER
+./build-ca --batch $SERVER nopass
 
 # Build keys
-./build-key-server --batch "${SERVER}server"
+./build-key-server --batch "${SERVER}server" nopass
 
 # Build dh
 if [ -d $KEY_DIR ] && [ $DH_KEY_SIZE ]; then
