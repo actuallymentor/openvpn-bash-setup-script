@@ -15,6 +15,7 @@ fi
 
 # Get Internet network interface with default route
 NIC=$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)')
+SUBNET=$(od -A n -t d -N 1 /dev/urandom |tr -d ' ')
 
 # Ask for user input, used for inspiration: https://github.com/Angristan/OpenVPN-install/blob/master/openvpn-install.sh
 echo "This should be your public IPv4 address."
@@ -158,7 +159,7 @@ echo "
 	persist-tun
 	user nobody
 	group nogroup
-	server 10.8.0.0 255.255.255.0
+	server 10.8.${SUBNET}.0 255.255.255.0
 	ifconfig-pool-persist ipp.txt
 	keepalive 10 120
 	dev tun${RANDOM}
