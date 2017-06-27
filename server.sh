@@ -165,7 +165,6 @@ echo "
 	key-direction 0
 	auth SHA256
 	verb 0
-	explicit-exit-notify 1
 "  >> /etc/openvpn/$SERVER.conf
 # Reroute all traffic over vpn
 echo 'push "redirect-gateway def1 bypass-dhcp"' >> /etc/openvpn/$SERVER.conf
