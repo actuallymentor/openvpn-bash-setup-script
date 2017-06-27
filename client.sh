@@ -53,10 +53,10 @@ thekeys="
 "$(</etc/openvpn/${CRT})"
 </cert>
 <key>
-"$(</etc/openvpn/easy-rsa/keys/${KEY})"
+"$(</etc/openvpn/${KEY})"
 </key>
 <tls-auth>
-"$(</etc/openvpn/${TA})"
+"$(<~/openvpn-ca/keys/${TA}.key)"
 </tls-auth>
 "
 echo thekeys >> ~/client-configs/files/$CLIENT.ovpn
