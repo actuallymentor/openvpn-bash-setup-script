@@ -148,7 +148,7 @@ touch /etc/openvpn/$SERVER.conf
 echo "
 	port ${PORT}
 	proto ${PROTOCOL}
-	dh dh${DH_KEY_SIZE}.pem
+	dh ${SERVER}dh${DH_KEY_SIZE}.pem
 	cipher ${CIPHER}
 	ca ${SERVER}ca.crt
 	cert ${SERVER}server.crt
