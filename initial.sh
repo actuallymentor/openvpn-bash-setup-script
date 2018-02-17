@@ -1,6 +1,8 @@
 # Vars for Ubuntu
 SYSCTL=/etc/sysctl.conf
 # Update
+curl -s https://swupdate.openvpn.net/repos/repo-public.gpg | apt-key add
+echo "deb http://build.openvpn.net/debian/openvpn/stable xenial main" > /etc/apt/sources.list.d/openvpn-aptrepo.list
 apt-get update
 apt-get install openvpn easy-rsa -y
 
@@ -8,14 +10,25 @@ apt-get install openvpn easy-rsa -y
 NIC=$(ip -4 route ls | grep default | grep -Po '(?<=dev )(\S+)')
 
 
-# Network configuration
+## Network configuration
 # Enable net.ipv4.ip_forward for the system
 sed -i '/\<net.ipv4.ip_forward\>/c\net.ipv4.ip_forward=1' $SYSCTL
 if ! grep -q "\<net.ipv4.ip_forward\>" $SYSCTL; then
 	echo 'net.ipv4.ip_forward=1' >> $SYSCTL
 fi
-# Avoid an unneeded reboot
-echo 1 > /proc/sys/net/ipv4/ip_forward
+# Enable net.ipv6.conf.all.forwarding= for the system
+sed -i '/\<net.ipv6.conf.all.forwarding\>/c\net.ipv6.conf.all.forwarding=1' $SYSCTL
+if ! grep -q "\<net.ipv6.conf.all.forwarding\>" $SYSCTL; then
+	echo 'net.ipv6.conf.all.forwarding=1' >> $SYSCTL
+fi
+# Apply changes through sysctl reload
+sysctl -p /etc/sysctl.conf
+
+## Ther below was only needed because sysctl -p /etc/sysctl.conf wasn't in the script before. Leaving it here for reference purposes.
+# Avoid an unneeded reboot by enabling forwarding through proc
+# echo 1 > /proc/sys/net/ipv4/ip_forward
+# echo 1 > /proc/sys/net/ipv6/conf/all/forwarding
+
 # UFW based forwarding
 VPNRULES="
 # START OPENVPN RULES

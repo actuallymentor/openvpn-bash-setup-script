@@ -28,8 +28,9 @@ read -p "Port: " -e -i 1194 PORT
 
 echo "What protocol do you want for OpenVPN?"
 echo "Unless UDP is blocked, you should not use TCP (unnecessarily slower)"
-while [[ $PROTOCOL != "udp" && $PROTOCOL != "tcp" ]]; do
-	read -p "Protocol [udp/tcp]: " -e -i udp PROTOCOL
+echo "If your server supports ipv6 choose udp6 (it also accepts ipv4 clients if openvpn is at v > 2.4)"
+while [[ $PROTOCOL != "udp" && $PROTOCOL != "tcp" && $PROTOCOL != "udp6" ]]; do
+	read -p "Protocol [udp/tcp/upd6]: " -e -i udp PROTOCOL
 done
 
 echo "What DNS do you want to use with the VPN?"
@@ -219,6 +220,6 @@ echo "
 " >> /etc/openvpn/${SERVER}.server
 
 
-# Set up firewall
-ufw allow "${PORT}/${PROTOCOL}"
+# Set up firewall where //[0-9]/ removes the potential 6 from udp6 since ufw should handle ipv6 by default
+ufw allow "${PORT}/${PROTOCOL//[0-9]/}"
 systemctl start openvpn@$SERVER
